@@ -7,50 +7,78 @@ import Add from "./Components/Add";
 import Save from "./Components/Save";
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState([]);
-  const API_URL = `${process.env.PUBLIC_URL}/db.json`;
+  const API_URL = "http://localhost:3000/db.json";
   useEffect(() => {
     axios
       .get(API_URL)
       .then((response) => setUser(response.data))
       .catch((err) => console.log(`Error: ${err.message}`));
   }, []);
-
   // ------------------------------------------------------------
 
-  let [userName, setUserName] = useState('')
-  let [userEmail, setUserEmail] = useState('')
+  let [userName, setUserName] = useState("");
+  let [userEmail, setUserEmail] = useState("");
 
   function handleAddData(name, email) {
-    let listItem = [...user]
+    let listItem = [...user];
     listItem.push({
-      id: user.length + 1,
+      id: user.length > 0 ? user[user.length-1] + 1 : 1,
       name: name,
-      email : email
-    })
-    setUser(listItem)
-    setUserName('')
-    setUserEmail('')
-    console.log(user)
-    navigate('/')
+      email: email,
+    });
+    setUser(listItem);
+    setUserName("");
+    setUserEmail("");
+    console.log(listItem)
+    navigate("/");
   }
 
   const [addressStreet, setAddressStreet] = useState("");
-  const [addressSuite, setAddressSuite] = useState('')
+  const [addressSuite, setAddressSuite] = useState("");
   const [addressCity, setAddressCity] = useState("");
-  const [addressZipcode, setAddressZipcode] = useState('')
-  const [phone, setPhone] = useState('')
+  const [addressZipcode, setAddressZipcode] = useState("");
+  const [phone, setPhone] = useState("");
 
-  function AddInfo() {
-    
-  }
-  function handleDelete(id) {
-    let listItem = [...user]
-    listItem = listItem.filter((val) => {
-     return  val.id != id
+  function AddInfo(id, saveName, saveEmail) {
+    let listItems = [...user];
+    listItems = listItems.filter((val) => val.id != id);
+    setUser(listItems)
+
+    user.map((val) => {
+      if (val.id != id) {
+        console.log(id)
+      }
     })
-    setUser(listItem)
+        listItems.push({
+          id: user.length>0?user.length + 1:1,
+          name: saveName,
+          email: saveEmail,
+          address: {
+            street: addressStreet,
+            suite: addressSuite,
+            city: addressCity,
+            zipcode: addressZipcode
+            
+          },phone: phone})
+    setUser(listItems)
+    setAddressStreet('')
+    setAddressSuite('')
+    setAddressCity('')
+    setAddressZipcode('')
+    setPhone('')
+    console.log(listItems)
+    navigate("/");
+  }
+
+  function handleDelete(id) {
+    let listItem = [...user];
+    listItem = listItem.filter((val) => {
+      return val.id != id;
+    });
+    setUser(listItem);
+    console.log(id, listItem)
     navigate("/");
   }
 
@@ -76,8 +104,9 @@ function App() {
         <Route
           path="/"
           element={
-            user.length ? (
-              user.map((val) => {
+            user.length ? (<div className="a">
+
+              {user.map((val) => {
                 return (
                   <Home
                     key={`${val.id}-${val.name}`}
@@ -87,8 +116,10 @@ function App() {
                     user={user}
                   />
                 );
-              })
-            ) : (
+              })}
+            </div>)
+              
+             : (
               <h1> "No Data Present Kindly Refresh The Page"</h1>
             )
           }
@@ -127,6 +158,8 @@ function App() {
               phone={phone}
               setPhone={setPhone}
               handleDelete={handleDelete}
+              user={user}
+              AddInfo={AddInfo}
             />
           }
         />

@@ -6,15 +6,19 @@
 .App {
   width: 80%;
   margin: 0 auto;
+  text-align: center;
   header {
     box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
     background-color: black;
-    width: 100%;
+    width: 80%;
     color: whitesmoke;
-    position: sticky;
+    position: fixed;
     top: 0;
     text-align: center;
     z-index: 1;
+  }
+  h1{
+    margin-top: 30%;
   }
   .nav {
     width: fit-content;
@@ -23,7 +27,9 @@
       color: black;
     }
     a {
+      
       padding: 5px;
+      
     }
   }
   header h1 {
@@ -66,9 +72,10 @@
 }
 .info {
   text-align: center;
-  margin-top: 70px;
+  margin-top: 150px;
 }
 .add {
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
   input {
@@ -85,13 +92,33 @@
   }
 }
 .save {
-  margin-top: 70px;
+  margin-top: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   input {
-    margin-top: 10px;
+    margin-top: 30px;
     height: 40px;
+    margin-left: 150px;
   }
-  
+  div input{
+   padding: 5px;
+  }
+  button{
+    margin-top: 100px;
+    padding: 10px;
+  }
+}
+.a{
+  margin-top: 120px;
+}
+.address{
+  a button{
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 10px;
+  }
+  button{
+    padding: 10px;
+  }
 }

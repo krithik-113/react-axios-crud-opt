@@ -12,13 +12,26 @@ const Save = ({
   setAddressZipcode,
   phone,
   setPhone,
+  user,
+  AddInfo,
 }) => {
   const { id } = useParams();
   return (
     <div className="save">
-      <h1>{id}</h1>
+      {user.map((val) => {
+        if (val.id == id) {
+          return (
+            
+            <div key={`${val.id}-${val.email}`}>
+              <h3>Name: {val.name}</h3>
+              <h3>Email: {val.email}</h3>
+            </div>
+          );
+        }
+      })}
       <div>
         <label htmlFor="street">Street</label>
+       
         <input
           id="street"
           type="text"
@@ -72,7 +85,13 @@ const Save = ({
           onChange={(e) => setPhone(e.target.value)}
         />
       </div>
-      <button>Save</button>
+      {user.map((val, index) => {
+        if (val.id == id) {
+          return <button key={index} onClick={() => AddInfo(id, val.name, val.email)}>Save</button>;
+        
+        }
+      })}
+      
     </div>
   );
 };

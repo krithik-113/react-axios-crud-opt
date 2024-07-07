@@ -10,7 +10,7 @@ const Home = ({id, name, email,user}) => {
             <p>Email: {email}</p>
           </div>
         </Link> 
-       
+       <hr />
       </>
     );
 }
