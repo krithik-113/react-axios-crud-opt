@@ -9,7 +9,7 @@ import Save from "./Components/Save";
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
-  const API_URL = "http://localhost:3000/db.json";
+  const API_URL = "https://sample-react-deploy.netlify.app/db.json";
   useEffect(() => {
     axios
       .get(API_URL)
@@ -22,17 +22,22 @@ function App() {
   let [userEmail, setUserEmail] = useState("");
 
   function handleAddData(name, email) {
-    let listItem = [...user];
-    listItem.push({
-      id: user.length > 0 ? user[user.length-1] + 1 : 1,
-      name: name,
-      email: email,
-    });
-    setUser(listItem);
-    setUserName("");
-    setUserEmail("");
-    console.log(listItem)
-    navigate("/");
+    if (name.length === 0) {
+    } else if(email.length === 0){
+    } else {
+      let listItem = [...user];
+      listItem.push({
+        id: user.length > 0 ? user[user.length - 1].id + 1 : 1,
+        name: name,
+        email: email,
+      });
+      setUser(listItem.reverse());
+      setUserName("");
+      setUserEmail("");
+      console.log(listItem);
+      navigate("/");
+    }
+    
   }
 
   const [addressStreet, setAddressStreet] = useState("");
@@ -42,34 +47,42 @@ function App() {
   const [phone, setPhone] = useState("");
 
   function AddInfo(id, saveName, saveEmail) {
-    let listItems = [...user];
-    listItems = listItems.filter((val) => val.id != id);
-    setUser(listItems)
+    if (
+      addressStreet.length !== 0 &&
+      addressSuite.length !== 0 &&
+      addressCity.length !== 0 &&
+      addressZipcode.length !== 0 &&
+      phone.length !== 0 ) {
+      let listItems = [...user];
+      listItems = listItems.filter((val) => val.id != id);
+      setUser(listItems.reverse());
 
-    user.map((val) => {
-      if (val.id != id) {
-        console.log(id)
-      }
-    })
-        listItems.push({
-          id: user.length>0?user.length + 1:1,
-          name: saveName,
-          email: saveEmail,
-          address: {
-            street: addressStreet,
-            suite: addressSuite,
-            city: addressCity,
-            zipcode: addressZipcode
-            
-          },phone: phone})
-    setUser(listItems)
-    setAddressStreet('')
-    setAddressSuite('')
-    setAddressCity('')
-    setAddressZipcode('')
-    setPhone('')
-    console.log(listItems)
-    navigate("/");
+      user.map((val) => {
+        if (val.id != id) {
+          console.log(id);
+        }
+      });
+      listItems.push({
+        id: user.length > 0 ? user.length + 1 : 1,
+        name: saveName,
+        email: saveEmail,
+        address: {
+          street: addressStreet,
+          suite: addressSuite,
+          city: addressCity,
+          zipcode: addressZipcode,
+        },
+        phone: phone,
+      });
+      setUser(listItems.reverse());
+      setAddressStreet("");
+      setAddressSuite("");
+      setAddressCity("");
+      setAddressZipcode("");
+      setPhone("");
+      console.log(listItems);
+      navigate("/");
+    }
   }
 
   function handleDelete(id) {
@@ -77,9 +90,17 @@ function App() {
     listItem = listItem.filter((val) => {
       return val.id != id;
     });
-    setUser(listItem);
+    setUser(listItem.reverse());
     console.log(id, listItem)
     navigate("/");
+  }
+
+  function handleEditing(street, suite, city, zipcode, phone) {
+      setAddressStreet(street);
+      setAddressSuite(suite);
+      setAddressCity(city);
+      setAddressZipcode(zipcode);
+      setPhone(phone);
   }
 
   return (
@@ -104,22 +125,21 @@ function App() {
         <Route
           path="/"
           element={
-            user.length ? (<div className="a">
-
-              {user.map((val) => {
-                return (
-                  <Home
-                    key={`${val.id}-${val.name}`}
-                    id={val.id}
-                    name={val.name}
-                    email={val.email}
-                    user={user}
-                  />
-                );
-              })}
-            </div>)
-              
-             : (
+            user.length ? (
+              <div className="a">
+                {user.map((val) => {
+                  return (
+                    <Home
+                      key={`${val.id}-${val.name}`}
+                      id={val.id}
+                      name={val.name}
+                      email={val.email}
+                      user={user}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
               <h1> "No Data Present Kindly Refresh The Page"</h1>
             )
           }
@@ -140,7 +160,13 @@ function App() {
 
         <Route
           path="/home/:id"
-          element={<Info user={user} handleDelete={handleDelete} />}
+          element={
+            <Info
+              user={user}
+              handleDelete={handleDelete}
+              handleEditing={handleEditing}
+            />
+          }
         />
 
         <Route

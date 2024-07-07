@@ -11,11 +11,13 @@ const Add = ({
     <div className="add">
       <input
         placeholder="Enter name"
+        required
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
       />
       <input
         placeholder="Enter email id"
+        required
         value={userEmail}
         onChange={(e) => setUserEmail(e.target.value)}
       />

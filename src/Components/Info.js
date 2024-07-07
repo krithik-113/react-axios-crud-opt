@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-const Info = ({ user, handleDelete }) => {
+const Info = ({ user, handleDelete, handleEditing }) => {
   const { id } = useParams();
   return (
     <div className="info">
@@ -14,7 +14,7 @@ const Info = ({ user, handleDelete }) => {
               <br />
               <div>Address: </div>
               {val.address ? (
-                <div className='address' key={`${val.id}-${val.phone}`}>
+                <div className="address" key={`${val.id}-${val.phone}`}>
                   <div>Street: {val.address.street}</div>
                   <div>Suite: {val.address.suite}</div>
                   <div>City: {val.address.city}</div>
@@ -23,18 +23,30 @@ const Info = ({ user, handleDelete }) => {
                   <div>Phone: {val.phone}</div>
 
                   <Link to={`/save/${val.id}`}>
-                    <button>Edit</button>
+                    <button
+                      onClick={() =>
+                        handleEditing(
+                          val.address.street,
+                          val.address.suite,
+                          val.address.city,
+                          val.address.zipcode,
+                          val.phone
+                        )
+                      }
+                    >
+                      Edit
+                    </button>
                   </Link>
 
                   <button onClick={() => handleDelete(val.id)}>Delete</button>
                 </div>
               ) : (
-                <>
+                <div className="emptyEdit">
                   <Link to={`/save/${val.id}`}>
                     <button>Edit</button>
                   </Link>
                   <button onClick={() => handleDelete(id)}>Delete</button>
-                </>
+                </div>
               )}
             </div>
           );

@@ -120,7 +120,19 @@
     padding: 10px;
   }
 }
-
+.emptyEdit{
+  margin-top: 50px;
+  a{
+    button{
+      margin-right: 50px;
+      padding: 5px;
+    }
+  }
+  button{
+    margin-left: 20px;
+    padding: 5px;
+  }
+}
 @media (max-width: 600px) {
   .save {
     div input {

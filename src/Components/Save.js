@@ -35,6 +35,7 @@ const Save = ({
         <input
           id="street"
           type="text"
+          required
           placeholder="Enter 
         Street"
           value={addressStreet}
@@ -45,6 +46,7 @@ const Save = ({
       <div>
         <label htmlFor="suite">Suite</label>
         <input
+          required
           id="suite"
           type="text"
           placeholder="Enter Suite"
@@ -56,6 +58,7 @@ const Save = ({
       <div>
         <label htmlFor="city">City</label>
         <input
+          required
           id="city"
           type="text"
           placeholder="Enter City"
@@ -67,8 +70,9 @@ const Save = ({
       <div>
         <label htmlFor="Zipcode">Zipcode</label>
         <input
+          required
           id="Zipcode"
-          type="number"
+          type="text"
           placeholder="Enter Zipcode"
           value={addressZipcode}
           onChange={(e) => setAddressZipcode(e.target.value)}
@@ -78,8 +82,9 @@ const Save = ({
       <div>
         <label htmlFor="phone">Phone</label>
         <input
+          required
           id="phone"
-          type="number"
+          type="text"
           placeholder="Enter phone no."
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
