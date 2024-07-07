@@ -96,10 +96,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  input {
+  div input {
     margin-top: 30px;
     height: 40px;
-    margin-left: 150px;
+    margin-left: 130px;
   }
   div input{
    padding: 5px;
@@ -120,5 +120,16 @@
   }
   button{
     padding: 10px;
+  }
+}
+
+@media (max-width:600px){
+  .save{
+    div input{
+        margin-left: 90px;
+    }
+    button{
+      margin-top: 40px;
+    }
   }
 }
