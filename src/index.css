@@ -17,7 +17,7 @@
     text-align: center;
     z-index: 1;
   }
-  h1{
+  h1 {
     margin-top: 30%;
   }
   .nav {
@@ -27,9 +27,7 @@
       color: black;
     }
     a {
-      
       padding: 5px;
-      
     }
   }
   header h1 {
@@ -101,47 +99,48 @@
     height: 40px;
     margin-left: 130px;
   }
-  div input{
-   padding: 5px;
+  div input {
+    padding: 5px;
   }
-  button{
+  button {
     margin-top: 100px;
     padding: 10px;
   }
 }
-.a{
+.a {
   margin-top: 120px;
 }
-.address{
-  a button{
+.address {
+  a button {
     margin-top: 20px;
     margin-right: 10px;
     padding: 10px;
   }
-  button{
+  button {
     padding: 10px;
   }
 }
 
-@media (max-width:600px){
-  .save{
-    div input{
-        margin-left: 90px;
+@media (max-width: 600px) {
+  .save {
+    div input {
+      margin-left: 90px;
     }
-    button{
+    button {
       margin-top: 40px;
     }
   }
 }
-@media (max-width:452px){
-  .App{
-header{
-    .nav{
-      a{
-        margin-left: 10px;
+@media (max-width: 500px) {
+  .App {
+    width: 100%;
+    header {
+      margin-left: 10%;
+      .nav {
+        a {
+          margin-left: 0;
+        }
       }
     }
   }
-  }
-  
 }
