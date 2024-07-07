@@ -133,3 +133,15 @@
     }
   }
 }
+@media (max-width:452px){
+  .App{
+header{
+    .nav{
+      a{
+        margin-left: 10px;
+      }
+    }
+  }
+  }
+  
+}
