@@ -9,8 +9,7 @@ import Save from "./Components/Save";
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
-  // const API_URL = "https://sample-react-deploy.netlify.app/db.json";
-  const API_URL = "http://localhost:3000/db.json";
+ const API_URL = "https://sample-react-deploy.netlify.app/db.json";
   useEffect(() => {
     axios
       .get(API_URL)
