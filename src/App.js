@@ -9,7 +9,8 @@ import Save from "./Components/Save";
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
-  const API_URL = "https://sample-react-deploy.netlify.app/db.json";
+  // const API_URL = "https://sample-react-deploy.netlify.app/db.json";
+  const API_URL = "http://localhost:3000/db.json";
   useEffect(() => {
     axios
       .get(API_URL)
@@ -21,9 +22,9 @@ function App() {
   let [userName, setUserName] = useState("");
   let [userEmail, setUserEmail] = useState("");
 
-  function handleAddData(name, email) {
+  async function handleAddData(name, email) {
     if (name.length === 0) {
-    } else if(email.length === 0){
+    } else if (email.length === 0) {
     } else {
       let listItem = [...user];
       listItem.push({
@@ -36,8 +37,8 @@ function App() {
       setUserEmail("");
       console.log(listItem);
       navigate("/");
+      
     }
-    
   }
 
   const [addressStreet, setAddressStreet] = useState("");
@@ -52,7 +53,8 @@ function App() {
       addressSuite.length !== 0 &&
       addressCity.length !== 0 &&
       addressZipcode.length !== 0 &&
-      phone.length !== 0 ) {
+      phone.length !== 0
+    ) {
       let listItems = [...user];
       listItems = listItems.filter((val) => val.id != id);
       setUser(listItems.reverse());
@@ -63,7 +65,7 @@ function App() {
         }
       });
       listItems.push({
-        id: user.length > 0 ? user.length + 1 : 1,
+        id: user.length > 0 ? user[user.length-1].id+1 : 1,
         name: saveName,
         email: saveEmail,
         address: {
@@ -82,6 +84,10 @@ function App() {
       setPhone("");
       console.log(listItems);
       navigate("/");
+    } else {
+      alert(
+        "Phone No. should be atleat 10 numbers (or) fill all the fields :-)"
+      );
     }
   }
 
@@ -91,16 +97,16 @@ function App() {
       return val.id != id;
     });
     setUser(listItem.reverse());
-    console.log(id, listItem)
+    console.log(id, listItem);
     navigate("/");
   }
 
   function handleEditing(street, suite, city, zipcode, phone) {
-      setAddressStreet(street);
-      setAddressSuite(suite);
-      setAddressCity(city);
-      setAddressZipcode(zipcode);
-      setPhone(phone);
+    setAddressStreet(street);
+    setAddressSuite(suite);
+    setAddressCity(city);
+    setAddressZipcode(zipcode);
+    setPhone(phone);
   }
 
   return (
