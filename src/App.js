@@ -9,7 +9,7 @@ import Save from "./Components/Save";
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
- const API_URL = "https://sample-react-deploy.netlify.app/db.json";
+   const API_URL = "https://sample-react-deploy.netlify.app/db.json";
   useEffect(() => {
     axios
       .get(API_URL)
@@ -54,17 +54,15 @@ function App() {
       addressZipcode.length !== 0 &&
       phone.length !== 0
     ) {
-      let listItems = [...user];
-      listItems = listItems.filter((val) => val.id != id);
-      setUser(listItems.reverse());
+     console.log(id);
+let listItems = [...user];
+listItems = listItems.filter((val) => val.id != id)
+     
 
-      user.map((val) => {
-        if (val.id != id) {
-          console.log(id);
-        }
-      });
+      
+
       listItems.push({
-        id: user.length > 0 ? user[user.length-1].id+1 : 1,
+        id: id,
         name: saveName,
         email: saveEmail,
         address: {
@@ -74,7 +72,7 @@ function App() {
           zipcode: addressZipcode,
         },
         phone: phone,
-      });
+      })
       setUser(listItems.reverse());
       setAddressStreet("");
       setAddressSuite("");
@@ -108,6 +106,10 @@ function App() {
     setPhone(phone);
   }
 
+ 
+      
+  
+  
   return (
     <div className="App">
       <header>
